@@ -190,4 +190,4 @@ Como evolución del proyecto, FoodExpress podría incorporar:
 
 ## Autor
 
-Desarrollado por [Anthony140823](https://github.com/Anthony140823).
+Desarrollado por el Grupo N° 12 del curso Aplicaciones Móviles del 10° ciclo de Ingeniería de Sistemas - 2026.
