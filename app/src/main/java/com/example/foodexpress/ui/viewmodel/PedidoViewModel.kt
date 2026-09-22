@@ -43,11 +43,14 @@ class PedidoViewModel(private val repository: PedidoRepository) : ViewModel() {
         }.asLiveData()
     }
 
-    fun crearPedido(pedido: Pedido, detalles: List<DetallePedido>) = viewModelScope.launch {
-        val id = repository.insertPedido(pedido)
-        val detallesConId = detalles.map { it.copy(pedidoId = id.toInt()) }
-        repository.insertDetalle(detallesConId)
+    suspend fun crearPedidoConfirmado(pedido: Pedido, detalles: List<DetallePedido>): Long {
+        val id = repository.crearPedidoCompleto(pedido, detalles)
         refresh()
+        return id
+    }
+
+    fun crearPedido(pedido: Pedido, detalles: List<DetallePedido>) = viewModelScope.launch {
+        crearPedidoConfirmado(pedido, detalles)
     }
 
     fun actualizarEstado(pedido: Pedido, nuevoEstado: String) = viewModelScope.launch {

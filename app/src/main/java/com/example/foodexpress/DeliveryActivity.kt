@@ -94,6 +94,10 @@ class DeliveryActivity : AppCompatActivity() {
                 b.tvOrderInfo.text = "Pedido #${p.id}"
                 b.tvOrderDetails.text = "Entrega en: ${p.direccionEntrega} - Total: S/ ${p.total}"
                 b.tvStatusLabel.text = "Estado: ${p.estado}"
+                b.btnOrderRoute.visibility = android.view.View.VISIBLE
+                b.btnOrderRoute.setOnClickListener {
+                    startActivity(MapActivity.route(this@DeliveryActivity, p.id))
+                }
                 
                 if (p.estado == "LISTO_PARA_ENVIO") {
                     b.btnAccionPedido.text = "Aceptar Pedido"

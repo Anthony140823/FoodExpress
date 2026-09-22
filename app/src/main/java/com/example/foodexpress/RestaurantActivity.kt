@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.activity.viewModels
+import androidx.activity.result.contract.ActivityResultContracts
+import com.example.foodexpress.data.repository.LocationRepository
+import com.example.foodexpress.maps.MapPoint
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,6 +29,22 @@ class RestaurantActivity : AppCompatActivity() {
     private var currentTab = 0
     private var restauranteId: Int = -1
     private var lastOrderCount = -1
+    private var restaurantPoint: MapPoint? = null
+    private val locationPicker = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        val point = MapActivity.pointFromResult(result.data)
+        if (result.resultCode == RESULT_OK && point != null && restauranteId != -1) {
+            lifecycleScope.launch {
+                try {
+                    LocationRepository(applicationContext).saveRestaurantPoint(restauranteId, point)
+                    restaurantPoint = point
+                    binding.btnRestaurantLocation.text = "Cambiar ubicación del restaurante ✓"
+                } catch (error: Exception) {
+                    if (error is kotlinx.coroutines.CancellationException) throw error
+                    DialogUtils.mostrarAlerta(this@RestaurantActivity, "No se pudo guardar", "Vuelve a seleccionar la ubicación del restaurante.")
+                }
+            }
+        }
+    }
 
     private val pedidoViewModel: PedidoViewModel by viewModels {
         PedidoViewModelFactory((application as FoodExpressApp).pedidoRepository)
@@ -43,6 +62,10 @@ class RestaurantActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         sessionManager = SessionManager(this)
+        restauranteId = savedInstanceState?.getInt("restaurantId", -1) ?: -1
+        binding.btnRestaurantLocation.setOnClickListener {
+            locationPicker.launch(MapActivity.pick(this, "Ubicación del restaurante", restaurantPoint))
+        }
 
         binding.rvRestaurantItems.layoutManager = LinearLayoutManager(this)
 
@@ -88,9 +111,17 @@ class RestaurantActivity : AppCompatActivity() {
 
             if (res != null) {
                 restauranteId = res.id
+                restaurantPoint = LocationRepository(applicationContext).restaurantPoint(restauranteId)
+                binding.btnRestaurantLocation.isEnabled = true
+                if (restaurantPoint != null) binding.btnRestaurantLocation.text = "Cambiar ubicación del restaurante ✓"
                 actualizarVista()
             }
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt("restaurantId", restauranteId)
+        super.onSaveInstanceState(outState)
     }
 
     private fun actualizarVista() {

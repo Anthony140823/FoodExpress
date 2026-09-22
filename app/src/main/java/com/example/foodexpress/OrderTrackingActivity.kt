@@ -36,6 +36,9 @@ class OrderTrackingActivity : AppCompatActivity() {
         sessionManager = SessionManager(this)
         orderId = intent.getIntExtra("PEDIDO_ID", -1)
         binding.tvOrderId.text = "Pedido #$orderId"
+        binding.btnViewRoute.setOnClickListener {
+            startActivity(MapActivity.route(this, orderId))
+        }
 
         binding.btnBackHome.setOnClickListener {
             finish()

@@ -11,5 +11,9 @@ data class Pedido(
     val costoEnvio: Double,
     val total: Double,
     val metodoPago: String,
-    val estado: String
+    val estado: String,
+    val entregaLat: Double? = null,
+    val entregaLng: Double? = null,
+    val origenLat: Double? = null,
+    val origenLng: Double? = null
 )

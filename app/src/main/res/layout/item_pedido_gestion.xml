@@ -58,6 +58,12 @@
             android:textSize="14sp" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnOrderRoute"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Ver ruta de entrega" android:visibility="gone" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAccionPedido"
             android:layout_width="match_parent"
             android:layout_height="56dp"

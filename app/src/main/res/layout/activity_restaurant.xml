@@ -34,12 +34,22 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRestaurantLocation"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp" android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp" android:enabled="false"
+        android:text="Ubicar restaurante en el mapa"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBar" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/fondo_principal"
-        app:layout_constraintTop_toBottomOf="@id/appBar"
+        app:layout_constraintTop_toBottomOf="@id/btnRestaurantLocation"
         app:tabIndicatorColor="@color/rojo_carmesí"
         app:tabSelectedTextColor="@color/rojo_carmesí"
         app:tabTextColor="@color/texto_secundario">

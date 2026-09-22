@@ -9,6 +9,18 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class PedidoDao(private val dbHelper: AdminSQLiteOpenHelper) {
+    private fun leerPedido(c: android.database.Cursor): Pedido {
+        fun coordenada(name: String): Double? {
+            val index = c.getColumnIndexOrThrow(name)
+            return if (c.isNull(index)) null else c.getDouble(index)
+        }
+        return Pedido(c.getInt(0), c.getInt(1), c.getInt(2),
+            if (c.isNull(3)) null else c.getInt(3), c.getString(4), c.getString(5),
+            c.getDouble(6), c.getDouble(7), c.getDouble(8), c.getString(9), c.getString(10),
+            coordenada("entregaLat"), coordenada("entregaLng"),
+            coordenada("origenLat"), coordenada("origenLng"))
+    }
+
     fun insertPedido(p: Pedido): Long {
         val db = dbHelper.writableDatabase
         val cv = ContentValues().apply {
@@ -22,8 +34,12 @@ class PedidoDao(private val dbHelper: AdminSQLiteOpenHelper) {
             put("total", p.total)
             put("metodo_pago", p.metodoPago)
             put("estado", p.estado)
+            put("entregaLat", p.entregaLat)
+            put("entregaLng", p.entregaLng)
+            put("origenLat", p.origenLat)
+            put("origenLng", p.origenLng)
         }
-        return db.insert("pedidos", null, cv)
+        return db.insertOrThrow("pedidos", null, cv)
     }
 
     fun insertDetalle(list: List<DetallePedido>) {
@@ -37,7 +53,20 @@ class PedidoDao(private val dbHelper: AdminSQLiteOpenHelper) {
                 put("nombre_platillo", d.nombrePlatillo)
                 put("subtotal", d.subtotal)
             }
-            db.insert("detalles_pedido", null, cv)
+            db.insertOrThrow("detalles_pedido", null, cv)
+        }
+    }
+
+    fun crearPedidoCompleto(p: Pedido, detalles: List<DetallePedido>): Long {
+        val db = dbHelper.writableDatabase
+        db.beginTransaction()
+        try {
+            val id = insertPedido(p)
+            insertDetalle(detalles.map { it.copy(pedidoId = id.toInt()) })
+            db.setTransactionSuccessful()
+            return id
+        } finally {
+            db.endTransaction()
         }
     }
 
@@ -55,7 +84,7 @@ class PedidoDao(private val dbHelper: AdminSQLiteOpenHelper) {
         val cursor = db.rawQuery("SELECT * FROM pedidos WHERE id = ?", arrayOf(id.toString()))
         var p: Pedido? = null
         if (cursor.moveToFirst()) {
-            p = Pedido(cursor.getInt(0), cursor.getInt(1), cursor.getInt(2), if (cursor.isNull(3)) null else cursor.getInt(3), cursor.getString(4), cursor.getString(5), cursor.getDouble(6), cursor.getDouble(7), cursor.getDouble(8), cursor.getString(9), cursor.getString(10))
+            p = leerPedido(cursor)
         }
         cursor.close()
         return p
@@ -66,7 +95,7 @@ class PedidoDao(private val dbHelper: AdminSQLiteOpenHelper) {
         val cursor = db.rawQuery("SELECT * FROM pedidos WHERE usuario_id = ? ORDER BY id DESC", arrayOf(id.toString()))
         val list = mutableListOf<Pedido>()
         while (cursor.moveToNext()) {
-            list.add(Pedido(cursor.getInt(0), cursor.getInt(1), cursor.getInt(2), if (cursor.isNull(3)) null else cursor.getInt(3), cursor.getString(4), cursor.getString(5), cursor.getDouble(6), cursor.getDouble(7), cursor.getDouble(8), cursor.getString(9), cursor.getString(10)))
+            list.add(leerPedido(cursor))
         }
         cursor.close()
         emit(list)
@@ -77,7 +106,7 @@ class PedidoDao(private val dbHelper: AdminSQLiteOpenHelper) {
         val cursor = db.rawQuery("SELECT * FROM pedidos WHERE restauranteId = ? ORDER BY id DESC", arrayOf(id.toString()))
         val list = mutableListOf<Pedido>()
         while (cursor.moveToNext()) {
-            list.add(Pedido(cursor.getInt(0), cursor.getInt(1), cursor.getInt(2), if (cursor.isNull(3)) null else cursor.getInt(3), cursor.getString(4), cursor.getString(5), cursor.getDouble(6), cursor.getDouble(7), cursor.getDouble(8), cursor.getString(9), cursor.getString(10)))
+            list.add(leerPedido(cursor))
         }
         cursor.close()
         emit(list)
@@ -88,7 +117,7 @@ class PedidoDao(private val dbHelper: AdminSQLiteOpenHelper) {
         val cursor = db.rawQuery("SELECT * FROM pedidos WHERE estado = 'LISTO_PARA_ENVIO' AND repartidorId IS NULL", null)
         val list = mutableListOf<Pedido>()
         while (cursor.moveToNext()) {
-            list.add(Pedido(cursor.getInt(0), cursor.getInt(1), cursor.getInt(2), if (cursor.isNull(3)) null else cursor.getInt(3), cursor.getString(4), cursor.getString(5), cursor.getDouble(6), cursor.getDouble(7), cursor.getDouble(8), cursor.getString(9), cursor.getString(10)))
+            list.add(leerPedido(cursor))
         }
         cursor.close()
         emit(list)
@@ -99,7 +128,7 @@ class PedidoDao(private val dbHelper: AdminSQLiteOpenHelper) {
         val cursor = db.rawQuery("SELECT * FROM pedidos WHERE repartidorId = ? AND estado = 'EN_CAMINO'", arrayOf(id.toString()))
         val list = mutableListOf<Pedido>()
         while (cursor.moveToNext()) {
-            list.add(Pedido(cursor.getInt(0), cursor.getInt(1), cursor.getInt(2), if (cursor.isNull(3)) null else cursor.getInt(3), cursor.getString(4), cursor.getString(5), cursor.getDouble(6), cursor.getDouble(7), cursor.getDouble(8), cursor.getString(9), cursor.getString(10)))
+            list.add(leerPedido(cursor))
         }
         cursor.close()
         emit(list)

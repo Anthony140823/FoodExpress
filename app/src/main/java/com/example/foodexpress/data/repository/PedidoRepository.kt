@@ -9,6 +9,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class PedidoRepository(private val pedidoDao: PedidoDao) {
+    suspend fun crearPedidoCompleto(pedido: Pedido, detalles: List<DetallePedido>): Long =
+        withContext(Dispatchers.IO) { pedidoDao.crearPedidoCompleto(pedido, detalles) }
     suspend fun insertPedido(pedido: Pedido): Long = withContext(Dispatchers.IO) { pedidoDao.insertPedido(pedido) }
     suspend fun insertDetalle(detalles: List<DetallePedido>) = withContext(Dispatchers.IO) { pedidoDao.insertDetalle(detalles) }
     suspend fun updatePedido(pedido: Pedido) = withContext(Dispatchers.IO) { pedidoDao.updatePedido(pedido) }

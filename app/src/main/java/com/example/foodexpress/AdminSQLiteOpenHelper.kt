@@ -7,9 +7,9 @@ import com.example.foodexpress.utils.HashUtils
 
 class AdminSQLiteOpenHelper(
     context: Context,
-    name: String = "FoodExpress.db",
+    name: String? = "FoodExpress.db",
     factory: SQLiteDatabase.CursorFactory? = null,
-    version: Int = 4
+    version: Int = 5
 ) : SQLiteOpenHelper(context, name, factory, version) {
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -22,6 +22,7 @@ class AdminSQLiteOpenHelper(
         db?.execSQL("CREATE TABLE calificaciones (id INTEGER PRIMARY KEY AUTOINCREMENT, pedido_id INTEGER, clienteId INTEGER, restauranteId INTEGER, estrellas INTEGER, comentario TEXT)")
 
         insertSeedData(db)
+        agregarCoordenadas(db)
     }
 
     private fun insertSeedData(db: SQLiteDatabase?) {
@@ -34,6 +35,10 @@ class AdminSQLiteOpenHelper(
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        if (oldVersion >= 4) {
+            if (oldVersion < 5) agregarCoordenadas(db)
+            return
+        }
         db?.execSQL("DROP TABLE IF EXISTS usuarios")
         db?.execSQL("DROP TABLE IF EXISTS restaurantes")
         db?.execSQL("DROP TABLE IF EXISTS platillos")
@@ -42,5 +47,13 @@ class AdminSQLiteOpenHelper(
         db?.execSQL("DROP TABLE IF EXISTS detalles_pedido")
         db?.execSQL("DROP TABLE IF EXISTS calificaciones")
         onCreate(db)
+    }
+
+    private fun agregarCoordenadas(db: SQLiteDatabase?) {
+        db?.execSQL("ALTER TABLE restaurantes ADD COLUMN latitud REAL")
+        db?.execSQL("ALTER TABLE restaurantes ADD COLUMN longitud REAL")
+        for (column in listOf("entregaLat", "entregaLng", "origenLat", "origenLng")) {
+            db?.execSQL("ALTER TABLE pedidos ADD COLUMN $column REAL")
+        }
     }
 }
