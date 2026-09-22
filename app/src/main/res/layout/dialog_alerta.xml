@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="24dp"
+    app:cardBackgroundColor="@color/card_background"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="8dp"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- ÍCONO SUPERIOR -->
+        <ImageView
+            android:id="@+id/ivIconoDialog"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:padding="4dp"
+            android:src="@android:drawable/ic_dialog_info" />
+
+        <!-- TÍTULO -->
+        <TextView
+            android:id="@+id/tvTituloDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Título de la alerta"
+            android:textColor="@color/texto_principal"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- MENSAJE -->
+        <TextView
+            android:id="@+id/tvMensajeDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Este es el mensaje detallado de la alerta."
+            android:textColor="@color/texto_secundario"
+            android:textSize="14sp" />
+
+        <!-- BOTÓN PERSONALIZADO -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAceptarDialog"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/rojo_carmesí"
+            android:text="Entendido"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:cornerRadius="12dp" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

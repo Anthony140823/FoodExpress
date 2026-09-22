@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/CardStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginVertical="8dp"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvOrderInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pedido #123"
+                android:textColor="@color/texto_principal"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                app:cardBackgroundColor="@color/rojo_carmesí_light"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp">
+                <TextView
+                    android:id="@+id/tvStatusLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:text="PENDIENTE"
+                    android:textColor="@color/rojo_carmesí"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </com.google.android.material.card.MaterialCardView>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvOrderDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Fecha: 19/09/2026 - Total: S/ 25.00"
+            android:textColor="@color/texto_secundario"
+            android:textSize="14sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAccionPedido"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
+            android:text="Procesar"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            app:cornerRadius="12dp" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

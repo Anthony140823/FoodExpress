@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo_principal">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/fondo_principal"
+        app:elevation="0dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Gestión de Restaurante"
+            app:titleTextColor="@color/texto_principal">
+
+            <ImageButton
+                android:id="@+id/btnLogoutRest"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_lock_power_off"
+                app:tint="@color/rojo_carmesí" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/fondo_principal"
+        app:layout_constraintTop_toBottomOf="@id/appBar"
+        app:tabIndicatorColor="@color/rojo_carmesí"
+        app:tabSelectedTextColor="@color/rojo_carmesí"
+        app:tabTextColor="@color/texto_secundario">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pedidos" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mis Platillos" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRestaurantItems"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddDish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:visibility="gone"
+        app:backgroundTint="@color/rojo_carmesí"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add"
+        app:tint="@android:color/white" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

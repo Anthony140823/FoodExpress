@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.FoodExpress" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/rojo_carmesí</item>
+        <item name="android:statusBarColor">@color/fondo_principal</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:colorBackground">@color/fondo_principal</item>
+    </style>
+</resources>

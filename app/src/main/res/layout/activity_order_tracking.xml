@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo_principal"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/tvTrackingTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seguimiento de Pedido"
+        android:textColor="@color/texto_principal"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvOrderId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Pedido #12345"
+        android:textColor="@color/texto_secundario"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTrackingTitle" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvStatus"
+        style="@style/CardStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tvOrderId">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="32dp">
+
+            <ImageView
+                android:id="@+id/ivStatusIcon"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@android:drawable/ic_menu_recent_history"
+                app:tint="@color/rojo_carmesí" />
+
+            <TextView
+                android:id="@+id/tvStatusText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="PENDIENTE"
+                android:textColor="@color/rojo_carmesí"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvStatusDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Estamos esperando que el restaurante confirme tu pedido."
+                android:textColor="@color/texto_secundario" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progressTracking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:progress="25"
+        app:indicatorColor="@color/rojo_carmesí"
+        app:layout_constraintTop_toBottomOf="@id/cvStatus"
+        app:trackColor="#EEEEEE"
+        app:trackCornerRadius="4dp"
+        app:trackThickness="8dp" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvCalificar"
+        style="@style/CardStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/progressTracking">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Qué te pareció el pedido?"
+                android:textColor="@color/texto_principal"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:hint="Comentario">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etComentario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEnviarCalificacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Enviar Calificación" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBackHome"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Volver al inicio"
+        android:textColor="@color/texto_secundario"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

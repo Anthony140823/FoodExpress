@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo_principal"
+    tools:context=".RegisterActivity">
+
+    <View
+        android:id="@+id/topViewReg"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@color/rojo_carmesí"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTitleRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Únete a nosotros"
+        android:textColor="@android:color/white"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/tvBackToLogin"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleRegister"
+        android:layout_marginTop="24dp">
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/CardStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilNombre"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nombre completo">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etNombre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilEmailRegister"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="Correo electrónico">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etEmailRegister"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilTelefono"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="Teléfono">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etTelefono"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPasswordRegister"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="Contraseña"
+                    app:endIconMode="password_toggle">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPasswordRegister"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilConfirmPassword"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="Confirmar contraseña"
+                    app:endIconMode="password_toggle">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etConfirmPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Campos Extra para Restaurante -->
+                <LinearLayout
+                    android:id="@+id/llRestauranteExtra"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilNombreRest"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:hint="Nombre del Restaurante">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etNombreRest"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilCategoriaRest"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:hint="Categoría (Italiana, Pizzas, etc.)">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etCategoriaRest"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="32dp"
+                    android:text="Registrarse"
+                    android:textStyle="bold"
+                    app:cornerRadius="12dp" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/tvBackToLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="¿Ya tienes cuenta? Inicia sesión"
+        android:textColor="@color/texto_secundario"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

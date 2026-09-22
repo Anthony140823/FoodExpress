@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- FOODEXPRESS PRO PALETTE (LIGHT) -->
+    <color name="fondo_principal">#FDFDFD</color>
+    <color name="texto_principal">#1A1A1A</color>
+    <color name="texto_secundario">#757575</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="gris_fondo">#F1F1F1</color>
+
+    <color name="rojo_carmesí">#E63946</color>
+    <color name="rojo_carmesí_light">#FADBD8</color>
+
+    <color name="azul_oscuro">#1D3557</color>
+    <color name="celeste_suave">#A8DADC</color>
+
+    <color name="verde_exito">#2ECC71</color>
+    <color name="naranja_alerta">#F39C12</color>
+</resources>
